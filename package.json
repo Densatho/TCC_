@@ -2,7 +2,7 @@
   "name": "tcc_",
   "version": "1.0.0",
   "description": "É um TCC aonde faremos um bot do discord de avisos de tarefas.",
-  "main": "server.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
