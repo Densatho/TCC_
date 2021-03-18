@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/Densatho/TCC_#readme",
   "dependencies": {
-    "discord.js": "^12.5.1",
-    "express": "^4.17.1"
+    "discord.js": "^12.5.1"
   }
 }
