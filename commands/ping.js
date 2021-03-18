@@ -4,4 +4,5 @@ module.exports = {
     execute(message, args){
         message.reply('pong!');
     }
+    
 }
