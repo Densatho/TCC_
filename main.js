@@ -25,8 +25,29 @@ client.on('message', message =>{
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift();
 
-    if(command === 'ping')
-        client.commands.get('ping').execute(message, args);
+    hooks = message.channel.fetchWebhooks().then(hooks => {
+
+        if (hooks.size === 0){
+            message.channel.createWebhook('ChoronoOne', reason = "need a cool new Webhook")
+            console.log(`> create a new WebHook`)
+        } else {
+            hooks.forEach(valor => {
+                console.log(`> valor = ${valor.name}`)
+                if (valor.name === 'ChoronoOne'){
+                    console.log(`> ChoronoOne is already created`)
+                } else {
+                    message.channel.createWebhook('ChoronoOne', reason = "need a cool new Webhook")
+                    console.log(`> create a new WebHook`)
+                }
+            })
+        }
+
+    })
+
+    if(client.commands.has(command)){
+        console.log(`> command accepted is ${command}`)
+        client.commands.get(command).execute(message, args);
+        }
     });
 
 
