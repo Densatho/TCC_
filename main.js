@@ -25,7 +25,7 @@ client.on('message', message =>{
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift();
 
-    hooks = message.channel.fetchWebhooks().then(hooks => {
+    message.channel.fetchWebhooks().then(hooks => {
 
         if (hooks.size === 0){
             message.channel.createWebhook('ChoronoOne', reason = "need a cool new Webhook")
