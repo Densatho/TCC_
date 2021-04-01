@@ -1,7 +1,7 @@
 module.exports = {
     name: 'ping',
     description: 'This is a ping command.',
-    execute(message, embed, webHook, args){        
+    execute(message, embed, webHook, args){
         embed.setTitle('Pong')
         embed.setColor('#008000')
         webHook.send('', {
