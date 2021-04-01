@@ -34,7 +34,7 @@ client.on('message', message => {
     message.channel.fetchWebhooks().then(hooks => {
         hooks.forEach(element => {
             if (element.name === 'ChoronoOne')
-                element.delete('End execution.')
+                element.delete('End of execution.')
         });
     })
 
