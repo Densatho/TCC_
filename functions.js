@@ -10,6 +10,7 @@ module.exports = {
             commands.push({
                 name: command.name,
                 description: command.description,
+                tag: command.tag,
                 command: command
             });
         }
