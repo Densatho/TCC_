@@ -2,6 +2,7 @@ const functions = require('./functions.js');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '-c ';
+const mongoose = require('mongoose');
 
 client.commands = new Discord.Collection();
 
@@ -22,7 +23,7 @@ client.on('message', message => {
     if (client.commands.has(command)) {
         const embed = new Discord.MessageEmbed();
         message.channel.createWebhook('ChronoOne', reason = "Send message").then(webHook => {
-            console.log(`> ${command} command is accepted`);
+            console.log(`> ${command} command accepted`);
             client.commands.get(command).execute(message, embed, webHook, args);
         });
     }
@@ -30,10 +31,22 @@ client.on('message', message => {
     message.channel.fetchWebhooks().then(hooks => {
         hooks.forEach(element => {
             if (element.name === 'ChronoOne');
-                element.delete('End of execution.');
+            element.delete('End of execution.');
         });
     });
 
+
 });
+
+mongoose.connect('mongodb+srv://ChronoAdmin:cvtE3NDRNAS1WeCX@cluster0.vfrrp.mongodb.net/MainDB?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+}).then(() => {
+    console.log('DB connected successfully.');
+}).catch((e) => {
+    console.log(e);
+});
+
 
 client.login('ODIyMjE0ODc4MDcyNjY4MTgw.YFPBRg.ECaLQuM61bWEeX-eb0AAz8y5CxE');
