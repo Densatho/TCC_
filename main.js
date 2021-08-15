@@ -37,20 +37,4 @@ client.on("message", (message) => {
   });
 });
 
-mongoose
-  .connect(
-    "mongodb+srv://ChronoAdmin:cvtE3NDRNAS1WeCX@cluster0.vfrrp.mongodb.net/MainDB?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-    }
-  )
-  .then(() => {
-    console.log("DB connected successfully.");
-  })
-  .catch((e) => {
-    console.log(e);
-  });
-
 client.login("ODIyMjE0ODc4MDcyNjY4MTgw.YFPBRg.ECaLQuM61bWEeX-eb0AAz8y5CxE");
