@@ -1,5 +1,5 @@
-import database from "./lib/database";
-import folder from "./database_ops/folderDB";
+import database from "../lib/database";
+import folder from "./folderDB";
 import { createPrefix } from "./prefix";
 
 databaseSetup(serverId)
