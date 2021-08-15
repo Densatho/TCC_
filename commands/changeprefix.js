@@ -5,13 +5,13 @@ module.exports = {
   description: "This command change a prefix in server.",
   tag: "control",
   execute(message, embed, webHook, args) {
-    serverPrefix = prefix.getPrefix(message.guild);
+    serverPrefix = prefix.getPrefix(message.guild.id);
     msg = message.content;
-    newPrefix = message.substr(serverPrefix.length + this.name.length + 1);
+    newPrefix = msg.substr(serverPrefix.length + this.name.length + 3);
     newPrefix += " ";
     prefix.updatePrefix(message.guild, newPrefix);
-    console.log("> Created database");
-    embed.setTitle("Pong");
+    console.log("> Update prefix");
+    embed.setTitle(`Prefix is changed to ${newPrefix}`);
     embed.setColor("#008000");
     webHook.send("", {
       username: "ChronoOne",
