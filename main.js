@@ -2,7 +2,6 @@ const functions = require("./functions.js");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const prefix = "-c ";
-const mongoose = require("mongoose");
 
 client.commands = new Discord.Collection();
 
