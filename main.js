@@ -5,6 +5,10 @@ const prefix = "-c ";
 
 client.commands = new Discord.Collection();
 
+client.on('guildCreate', (guild) => {
+    
+})
+
 functions.get_commands().forEach((element) => {
   client.commands.set(element.name, element.command);
 });
@@ -28,6 +32,8 @@ client.on("message", (message) => {
         client.commands.get(command).execute(message, embed, webHook, args);
       });
   }
+
+
 
   message.channel.fetchWebhooks().then((hooks) => {
     hooks.forEach((element) => {
