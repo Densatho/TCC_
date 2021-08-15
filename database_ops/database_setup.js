@@ -1,14 +1,8 @@
-import database from "../lib/database";
-import folder from "./folderDB";
-import { createPrefix } from "./prefix";
+const database = require("../lib/database");
+const prefix = require("./prefix");
 
-function databaseSetup(serverId) {
-  database
-    .database()
-    .ref(folder + "/" + serverId)
-    .set({
-      prefix: createPrefix(serverId),
-    });
-}
-
-export default databaseSetup;
+module.exports = {
+  databaseSetup(serverId) {
+    prefix.createPrefix(serverId);
+  },
+};
