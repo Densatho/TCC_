@@ -1,7 +1,7 @@
 import database from "../lib/firebase";
 import folder from "./folderDB";
 
-function prefixGet(serverId) {
+function getPrefix(serverId) {
   var value = 0;
   let prefixRef = database().ref(folder + serverId);
   prefixRef.on("prefix", (snapshot) => {
@@ -10,4 +10,4 @@ function prefixGet(serverId) {
   return value;
 }
 
-export default prefixGet;
+export default getPrefix;
