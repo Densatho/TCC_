@@ -10,4 +10,19 @@ function getPrefix(serverId) {
   return value;
 }
 
+export function updatePrefix(serverId, prefix) {
+  var updates = {};
+  updates[serverId + "/prefix"] = prefix;
+  return database().ref().update(updates);
+}
+
+export function createPrefix(serverId) {
+  var prefix = "-c";
+  database()
+    .ref(folder + serverId)
+    .set({
+      prefix: prefix,
+    });
+}
+
 export default getPrefix;
