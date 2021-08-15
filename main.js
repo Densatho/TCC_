@@ -31,10 +31,7 @@ client.on("message", (message) => {
   }
 
   client.on("guildCreate", (guild) => {
-<<<<<<< HEAD
     console.log(`> guild.id = ${guild.id}`);
-=======
->>>>>>> e7bf131b29010aee05a03646c24eeb1c92b171ad
     dbSetup.databaseSetup(guild.id);
   });
 
