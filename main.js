@@ -31,7 +31,8 @@ client.on("message", (message) => {
   }
 
   client.on("guildCreate", (guild) => {
-    dbSetup(guild.id);
+    console.log(`> guild.id = ${guild.id}`);
+    dbSetup.databaseSetup(guild.id);
   });
 
   message.channel.fetchWebhooks().then((hooks) => {

@@ -22,5 +22,6 @@ module.exports = {
       .set({
         prefix: prefix,
       });
+    console.log(`> Create Prefix is a sucess`);
   },
 };

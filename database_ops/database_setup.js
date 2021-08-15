@@ -5,5 +5,6 @@ const prefix = require("./prefix");
 module.exports = {
   databaseSetup(serverId) {
     prefix.createPrefix(serverId);
+    console.log(`> enter in databaseSetup`);
   },
 };
