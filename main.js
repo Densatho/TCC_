@@ -2,7 +2,7 @@ const functions = require("./functions.js");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const prefix = "-c ";
-import databaseSetup from "./database_ops/database_setup"
+import databaseSetup from "./database_ops/database_setup";
 
 client.commands = new Discord.Collection();
 
@@ -30,10 +30,9 @@ client.on("message", (message) => {
       });
   }
 
-  client.on('guildCreate', (guild) => {
-    databaseSetup(guild.id)
-})
-
+  client.on("guildCreate", (guild) => {
+    databaseSetup(guild.id);
+  });
 
   message.channel.fetchWebhooks().then((hooks) => {
     hooks.forEach((element) => {
