@@ -1,7 +1,7 @@
 import database from "../lib/database";
 import folder from "./folderDB";
 import { createPrefix } from "./prefix";
-
+//
 module.exports = {
   databaseSetup(serverId) {
     database

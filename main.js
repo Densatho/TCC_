@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const prefix = "-c ";
 const dbSetup = require("./database_ops/database_setup.js");
-
+//
 client.commands = new Discord.Collection();
 
 functions.get_commands().forEach((element) => {
