@@ -4,22 +4,24 @@ const folder = require("./folderDB");
 module.exports = {
   getPrefix(serverId) {
     var value = 0;
-    let prefixRef = database.createDatabase().ref(folder.path + serverId);
-    prefixRef.on("prefix", (snapshot) => {
-      value = snapshot.val();
-    });
-    return value;
+    let prefixRef = database.createDatabase().ref(folder.value + serverId);
+    return prefixRef.once("prefix");
   },
   updatePrefix(serverId, prefix) {
     var updates = {};
-    updates[folder.path + serverId + "/prefix"] = prefix;
-    database.createDatabase().ref().update(updates);
-  },
-  createPrefix(serverId) {
-    var prefix = "-c";
+    updates[folder.value + serverId + "/prefix"] = prefix;
     database
       .createDatabase()
-      .ref(folder.path + serverId)
+      .ref(folder.valuer + serverId)
+      .set({
+        prefix: prefix,
+      });
+  },
+  createPrefix(serverId) {
+    var prefix = "-c ";
+    database
+      .createDatabase()
+      .ref(folder.value + serverId)
       .set({
         prefix: prefix,
       });

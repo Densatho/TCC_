@@ -1,3 +1,3 @@
 module.exports = {
-  folder: "root/",
+  value: "root/",
 };
