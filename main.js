@@ -2,13 +2,8 @@ const functions = require("./functions.js");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const prefix = "-c ";
-<<<<<<< HEAD
-const databaseSetup = require("./database_ops/database_setup");
-
-=======
 const dbSetup = require("./database_ops/database_setup.js");
 //
->>>>>>> 2e2ae5fa4c4defc916dad284341d64a63a628ba1
 client.commands = new Discord.Collection();
 
 functions.get_commands().forEach((element) => {
