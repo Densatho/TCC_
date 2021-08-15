@@ -30,11 +30,6 @@ client.on("message", (message) => {
       });
   }
 
-  client.on("guildCreate", (guild) => {
-    console.log(`> guild.id = ${guild.id}`);
-    dbSetup.databaseSetup(guild.id);
-  });
-
   message.channel.fetchWebhooks().then((hooks) => {
     hooks.forEach((element) => {
       if (element.name === "ChronoOne");
