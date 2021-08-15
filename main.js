@@ -31,11 +31,7 @@ client.on("message", (message) => {
   }
 
   client.on("guildCreate", (guild) => {
-<<<<<<< HEAD
-    databaseSetup(guild.id);
-=======
     dbSetup(guild.id);
->>>>>>> 2e2ae5fa4c4defc916dad284341d64a63a628ba1
   });
 
   message.channel.fetchWebhooks().then((hooks) => {
