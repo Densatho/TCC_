@@ -26,7 +26,9 @@ client.on("message", (message) => {
 
 client.login("ODIyMjE0ODc4MDcyNjY4MTgw.YFPBRg.ECaLQuM61bWEeX-eb0AAz8y5CxE");
 
-function messageResponse(message, prefix) {
+function messageResponse(request) {
+  let message = request.message;
+  let prefix = request.prefix;
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).split(/ +/);

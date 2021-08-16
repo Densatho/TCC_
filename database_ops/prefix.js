@@ -10,7 +10,8 @@ module.exports = {
       .once("value")
       .then((snapshot) => {
         let prefix = snapshot.val()[request.guildId].prefix;
-        request.messageResponse(request.message, prefix);
+        request["prefix"] = prefix;
+        request.messageResponse(request);
         console.log(prefix);
       });
     return this.prefix;
