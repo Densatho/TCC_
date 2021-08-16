@@ -2,15 +2,16 @@ const database = require("../lib/database");
 const folder = require("./folderDB");
 
 module.exports = {
-  getPrefix(serverId) {
-    console.log(serverId);
+  getPrefix(request) {
+    console.log(request.guildId);
     database
       .createDatabase()
       .ref(folder.value)
       .once("value")
       .then((snapshot) => {
-        this.prefix = snapshot.val()[serverId].prefix;
-        console.log(this.prefix);
+        let prefix = snapshot.val()[request.guildId].prefix;
+        request.messageResponse(request.message, prefix);
+        console.log(prefix);
       });
     return this.prefix;
   },
@@ -31,6 +32,4 @@ module.exports = {
       });
     console.log(`> Create Prefix is a sucess`);
   },
-  prefix: "-c ",
-  test: true,
 };

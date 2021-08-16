@@ -15,9 +15,18 @@ client.once("ready", () => {
 });
 
 client.on("message", (message) => {
-  var prefix = prefixDB.getPrefix(message.guild.id);
-  while (prefix.test) {}
-  console.log(`> prefix: ${prefix}`);
+  prefixRequest = {
+    guildId: message.guild.id,
+    message: message,
+    messageResponse: messageResponse,
+  };
+
+  prefixDB.getPrefix(prefixRequest);
+});
+
+client.login("ODIyMjE0ODc4MDcyNjY4MTgw.YFPBRg.ECaLQuM61bWEeX-eb0AAz8y5CxE");
+
+function messageResponse(message, prefix) {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).split(/ +/);
@@ -39,8 +48,4 @@ client.on("message", (message) => {
       element.delete("End of execution.");
     });
   });
-
-  prefixDB.test = true;
-});
-
-client.login("ODIyMjE0ODc4MDcyNjY4MTgw.YFPBRg.ECaLQuM61bWEeX-eb0AAz8y5CxE");
+}
