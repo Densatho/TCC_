@@ -9,10 +9,18 @@ module.exports = {
       .ref(folder.value)
       .once("value")
       .then((snapshot) => {
-        let prefix = snapshot.val()[request.guildId].prefix;
-        request["prefix"] = prefix;
-        request.messageResponse(request);
-        console.log(prefix);
+        let prefix;
+        try {
+          prefix = snapshot.val()[request.guildId].prefix;
+          request["prefix"] = prefix;
+          request.messageResponse(request);
+          console.log(prefix);
+        } catch (error) {
+          console.log(`> server is not registered...`);
+          console.log(`> registering server...`);
+          this.createPrefix(request.guildId);
+          this.getPrefix(request);
+        }
       });
     return this.prefix;
   },
