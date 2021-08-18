@@ -2,8 +2,8 @@ const prefix = require("../database_ops/prefix");
 
 module.exports = {
   name: "changeprefix",
-  description: "This command change a prefix in server.",
-  tag: "control",
+  description: "Comando para se mudar o prefixo",
+  tag: "controle",
   execute(message, embed, webHook, args) {
     function changePrefix(request) {
       let message = request.message;
@@ -19,7 +19,7 @@ module.exports = {
 
       prefix.updatePrefix(message.guild.id, newPrefix);
 
-      embed.setTitle(`Prefix is changed to ${newPrefix}`);
+      embed.setTitle(`Prefixo foi mudado para ${newPrefix}`);
       embed.setColor("#008000");
       webHook.send("", {
         username: "ChronoOne",

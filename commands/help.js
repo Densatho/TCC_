@@ -2,8 +2,9 @@ const functions = require("../functions.js");
 
 module.exports = {
   name: "help",
-  description: "This command show all commands.",
-  tag: "control",
+  description:
+    "Comando que mostra todos os comandos e que mostra a descrição de um comando",
+  tag: "controle",
   execute(message, embed, webHook, args) {
     embed.setTitle("Help");
     embed.setColor("#FFFF00");
