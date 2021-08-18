@@ -1,6 +1,6 @@
 module.exports = {
   name: "ping",
-  description: "This is a ping command.",
+  description: "Comando de ping",
   tag: "4fun",
   execute(message, embed, webHook, args) {
     embed.setTitle("Pong");
