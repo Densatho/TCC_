@@ -1,12 +1,9 @@
 const functions = require("./functions.js");
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const database = require("./lib/database");
 const prefixDB = require("./database_ops/prefix");
 //
 client.commands = new Discord.Collection();
-
-if (!database.db) database.createDatabase();
 
 functions.get_commands().forEach((element) => {
   client.commands.set(element.name, element.command);
