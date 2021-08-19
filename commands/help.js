@@ -14,7 +14,7 @@ module.exports = {
     value_control = "";
     value_4fun = "";
     functions.get_commands().forEach((command) => {
-      if (command.tag === "control") {
+      if (command.tag === "controle") {
         value_control += `\`${command.name}\`, `;
       } else if (command.tag === "4fun") {
         value_4fun += `\`${command.name}\`, `;
