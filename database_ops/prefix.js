@@ -2,6 +2,14 @@ const database = require("../lib/database");
 const folder = require("./folderDB");
 
 module.exports = {
+  /**
+   * getPrefix acessa o banco de dados usando o id do servidor do discord
+   * pega o prefix e adiciona em request.prefix para poder utilizado na
+   * função padrão vindo em request, a request.messageResponse
+   * fazendo assim a execução da função com o devido prefix do servidor
+   * @param {*object} request
+   * @returns UNDEFINED
+   */
   getPrefix(request) {
     console.log(request.guildId);
     database
