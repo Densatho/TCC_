@@ -32,6 +32,12 @@ module.exports = {
       });
     return this.prefix;
   },
+  /**
+   * updatePrefix utiliza o serverId para acessar o banco de dados
+   * e conseguir mudar para o prefix
+   * @param {*int} serverId
+   * @param {*String} prefix
+   */
   updatePrefix(serverId, prefix) {
     let databaseRef = database.createDatabase().ref(folder.value + serverId);
     let updates = {};
@@ -39,6 +45,11 @@ module.exports = {
     updates["/prefix"] = prefix;
     databaseRef.update(updates);
   },
+  /**
+   * CreatePrefix cria o servidor no banco de dados com um prefix padrão
+   * que é "-c"
+   * @param {*Int} serverId
+   */
   createPrefix(serverId) {
     var prefix = "-c ";
     database
