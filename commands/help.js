@@ -39,9 +39,6 @@ module.exports = {
       value_control = value_control.substr(0, value_control.length - 2);
       value_4fun = value_4fun.substr(0, value_4fun.length - 2);
 
-      console.log(`Help > value_control: ${value_control}`);
-      console.log(`Help > value_4fun: ${value_4fun}`);
-
       embed.addField(`Gerenciamento de bot:`, value_control);
       embed.addField(`Miscelânia:`, value_4fun);
     }

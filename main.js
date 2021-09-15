@@ -20,7 +20,7 @@ client.on("message", (message) => {
   Prefix.getPrefix(message.guild.id);
 
   Prefix.once("getPrefix", (prefix) => {
-    console.log(`> dbP: ${prefix}`);
+    console.log(`> ${message.guild.name}'s prefix: ${prefix}`);
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
@@ -31,7 +31,7 @@ client.on("message", (message) => {
       message.channel
         .createWebhook("ChronoOne", (reason = "Send message"))
         .then((webHook) => {
-          console.log(`> ${command} command accepted`);
+          console.log(`   > ${command} command accepted`);
           client.commands.get(command).execute(message, embed, webHook, args);
         });
     }

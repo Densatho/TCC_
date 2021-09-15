@@ -40,9 +40,9 @@ class Prefix extends EventEmitter {
       updates["/prefix"] = prefix;
       databaseRef.update(updates);
       confirmation = true;
-      console.log(`> Update Prefix sucess`);
+      console.log(`      > Update Prefix sucess`);
     } catch (error) {
-      console.log(`> Update Prefix failed`);
+      console.log(`      > Update Prefix failed`);
     }
     this.emit("updatePrefix", confirmation);
   }
@@ -55,7 +55,6 @@ class Prefix extends EventEmitter {
    * @param {*int} guildId
    */
   getPrefix(guildId) {
-    console.log(guildId);
     database
       .createDatabase()
       .ref(folder.value)
@@ -63,7 +62,6 @@ class Prefix extends EventEmitter {
       .then((snapshot) => {
         try {
           let prefix = snapshot.val()[guildId].prefix;
-          console.log(prefix);
           this.emit("getPrefix", prefix);
         } catch (error) {
           console.log(`> server is not registered...`);
