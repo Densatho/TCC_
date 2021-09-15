@@ -3,7 +3,7 @@ const dbSchedule = require("./database_ops/schedule");
 
 class ScheduleVerify extends EventEmitter {
   verify() {
-    let hour = 13;
+    let hour = 12;
     let notifyTime = false;
     setInterval(() => {
       console.log("> verify: setInterval()");
@@ -12,7 +12,7 @@ class ScheduleVerify extends EventEmitter {
         notifyTime = true;
       }
       this.emit("verify", notifyTime);
-    }, 6000);
+    }, 3600000);
   }
   scheduleList() {}
 }
