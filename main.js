@@ -2,6 +2,8 @@ const functions = require("./functions.js");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const prefixDB = require("./database_ops/prefix");
+const scheduleVerify = require("./scheduleVerify");
+const sv = new scheduleVerify.ScheduleVerify();
 //
 client.commands = new Discord.Collection();
 
@@ -50,3 +52,13 @@ function messageResponse(request) {
 }
 
 client.login("ODIyMjE0ODc4MDcyNjY4MTgw.YFPBRg.ECaLQuM61bWEeX-eb0AAz8y5CxE");
+
+sv.on("verify", (notifyTime) => {
+  if (notifyTime) {
+    console.log("> Notifying users");
+  } else {
+    console.log("> waiting to notify users");
+  }
+});
+
+sv.verify();
