@@ -1,45 +1,51 @@
-const prefixOps = require("../database_ops/prefix");
-const { createDatabase } = require("../lib/database");
+const { clearConfigCache } = require("prettier");
+const sch = require("../database_ops/schedule");
 
 module.exports = {
   name: "csh",
-  description: "Create a new Schedule",
+  description: "Cria uma nova tarefa composta de Título, descrição e prazo.",
   tag: "create",
   execute(message, embed, webHook, args) {
-      let prefix = prefixOps.getPrefix();
+    let sb = "";
 
-      let messageUnusedPart = prefix.length + "csh".length + 1;
+    args.forEach((element) => {
+      sb += element + " ";
+    });
+    sb = sb.substr().split(", ");
 
-      let mensagemSeparada = message.substr().split(',')
+    //TODO: Validações: deadline isnumber, quantidade de parametros, dia/mes/hora
+    let [title, description, deadline] = sb;
 
-      //[0]                 [1]                       [2]
-      //-f csh Comprar Pão, comprar 6 pães na padaria, 7 days
+    let dateMS = Date.now();
+    let deadlineDate = new Date(Date.now());
 
-      let title = mensagemSeparada[0].substr(messageUnusedPart);
-      console.log(`[csh] title: ${title}`);
-      let description = mensagemSeparada[1];
-      console.log(`[csh] title: ${description}`);
-      let deadline = mensagemSeparada[2];
-      console.log(`[csh] title: ${deadline}`);
+    deadlineDate = deadlineDate.setDate(
+      deadlineDate.getDate() + Number(deadline)
+    );
 
-      let userSchedules = `/${request.userId}/schedules`;
-      let databaseRef = createDatabase().ref(folder.value + serverId + userSchedules);
-      console.log(databaseRef);
-      var date = new Date();
-  
-      // databaseRef.set({
-      //   creation_date: date.getDate(),
-      //   description: description,
-      //   due_date: date.setDate(date.getDate() + deadline),
-      //   name: title
-      // })
+    let schedulePath = `/${message.author.id}/schedules/${dateMS}`;
 
-      embed.setTitle(`Tarefa ${title} agendada com sucesso!`);
-      embed.setColor("#008000");
-      webHook.send("", {
-        username: "ChronoOne",
-        avatarURL: "https://imgur.com/M2uFwtY.png",
-        embeds: [embed],
-      });
-    }
+    console.log(deadlineDate);
+
+    request = {
+      serverId: message.guild.id,
+      schedulePath: schedulePath,
+      dbData: {
+        name: title,
+        creation_date: dateMS,
+        description: description,
+        dead_line: deadlineDate,
+      },
+    };
+
+    sch.createSchedule(request);
+
+    embed.setTitle(`Tarefa ${title} agendada com sucesso!`);
+    embed.setColor("#008000");
+    webHook.send("", {
+      username: "ChronoOne",
+      avatarURL: "https://imgur.com/M2uFwtY.png",
+      embeds: [embed],
+    });
+  },
 };

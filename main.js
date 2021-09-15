@@ -23,8 +23,6 @@ client.on("message", (message) => {
   prefixDB.getPrefix(prefixRequest);
 });
 
-client.login("ODIyMjE0ODc4MDcyNjY4MTgw.YFPBRg.ECaLQuM61bWEeX-eb0AAz8y5CxE");
-
 function messageResponse(request) {
   let message = request.message;
   let prefix = request.prefix;
@@ -50,3 +48,5 @@ function messageResponse(request) {
     });
   });
 }
+
+client.login("ODIyMjE0ODc4MDcyNjY4MTgw.YFPBRg.ECaLQuM61bWEeX-eb0AAz8y5CxE");
