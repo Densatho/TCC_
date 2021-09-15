@@ -1,12 +1,11 @@
 const functions = require("./functions.js");
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const prefixDB = require("./database_ops/prefix");
 const scheduleVerify = require("./scheduleVerify");
 const sv = new scheduleVerify.ScheduleVerify();
 const dbPrefix = require("./database_ops/prefix");
-const dbP = new dbPrefix.Prefix();
-//
+const Prefix = new dbPrefix.Prefix();
+
 client.commands = new Discord.Collection();
 
 functions.get_commands().forEach((element) => {
@@ -18,9 +17,9 @@ client.once("ready", () => {
 });
 
 client.on("message", (message) => {
-  dbP.getPrefix(message.guild.id);
+  Prefix.getPrefix(message.guild.id);
 
-  dbP.once("getPrefix", (prefix) => {
+  Prefix.once("getPrefix", (prefix) => {
     console.log(`> dbP: ${prefix}`);
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
