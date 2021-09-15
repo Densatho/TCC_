@@ -1,5 +1,5 @@
-const { clearConfigCache } = require("prettier");
-const sch = require("../database_ops/schedule");
+const dbSch = require("../database_ops/schedule");
+const Sch = new dbSch.Schedule();
 
 module.exports = {
   name: "csh",
@@ -27,18 +27,13 @@ module.exports = {
 
     console.log(deadlineDate);
 
-    request = {
-      serverId: message.guild.id,
-      schedulePath: schedulePath,
-      dbData: {
-        name: title,
-        creation_date: dateMS,
-        description: description,
-        dead_line: deadlineDate,
-      },
+    data = {
+      name: title,
+      creation_date: dateMS,
+      description: description,
+      dead_line: deadlineDate,
     };
-
-    sch.createSchedule(request);
+    Sch.createSchedule(message.guild.id, schedulePath, data);
 
     embed.setTitle(`Tarefa ${title} agendada com sucesso!`);
     embed.setColor("#008000");

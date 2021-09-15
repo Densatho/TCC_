@@ -1,13 +1,22 @@
 const database = require("../lib/database");
 const folder = require("./folderDB");
+const EventEmitter = require("events");
 
-module.exports = {
-  createSchedule(request) {
-    database
-      .createDatabase()
-      .ref(folder.value + request.serverId + request.schedulePath)
-      .set(request.dbData);
-  },
+class Schedule extends EventEmitter {
+  createSchedule(guildId, schedulePath, data) {
+    let confirmation = true;
+    try {
+      database
+        .createDatabase()
+        .ref(folder.value + guildId + schedulePath)
+        .set(data);
+    } catch (error) {
+      confirmation = false;
+    }
+    this.emit("createSchedule", confirmation);
+  }
 
-  deleteSchedule(request) {},
-};
+  deleteSchedule() {}
+}
+
+module.exports.Schedule = Schedule;
