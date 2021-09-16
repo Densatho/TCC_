@@ -34,20 +34,15 @@ client.on("message", (message) => {
           console.log(`   > ${command} command accepted`);
           client.commands.get(command).execute(message, embed, webHook, args);
         });
-    }
-
-    setInterval(() => {
       message.channel.fetchWebhooks().then((hooks) => {
         hooks.forEach((element) => {
           if (element.name === "ChronoOne");
           element.delete("End of execution.");
         });
       });
-    }, 1000);
+    }
   });
 });
-
-client.login("ODIyMjE0ODc4MDcyNjY4MTgw.YFPBRg.ECaLQuM61bWEeX-eb0AAz8y5CxE");
 
 sv.on("verify", (notifyTime) => {
   if (notifyTime) {
@@ -58,3 +53,5 @@ sv.on("verify", (notifyTime) => {
 });
 
 sv.verify();
+
+client.login("ODIyMjE0ODc4MDcyNjY4MTgw.YFPBRg.ECaLQuM61bWEeX-eb0AAz8y5CxE");

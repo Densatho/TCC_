@@ -1,3 +1,4 @@
+const { value } = require("../database_ops/folderDB");
 const dbSch = require("../database_ops/schedule");
 const Sch = new dbSch.Schedule();
 
@@ -11,9 +12,13 @@ module.exports = {
     args.forEach((element) => {
       sb += element + " ";
     });
-    sb = sb.substr().split(", ");
+    sb = sb.substr().split(",");
 
     //TODO: Validações: deadline isnumber, quantidade de parametros, dia/mes/hora
+    for (let i = 0; i < sb.length; i++) {
+      sb[i] = sb[i].trim();
+    }
+
     let [title, description, deadline] = sb;
 
     let dateMS = Date.now();
@@ -23,19 +28,17 @@ module.exports = {
       deadlineDate.getDate() + Number(deadline)
     );
 
-    let schedulePath = `/${message.author.id}/schedules/${dateMS}`;
-
-    console.log(deadlineDate);
+    let schedulePath = `/${message.author.id}/schedules/${title}`;
 
     data = {
-      name: title,
       creation_date: dateMS,
       description: description,
       dead_line: deadlineDate,
     };
+    console.log(data);
     Sch.createSchedule(message.guild.id, schedulePath, data);
 
-    embed.setTitle(`Tarefa ${title} agendada com sucesso!`);
+    embed.setTitle(`Tarefa "${title}" agendada com sucesso!`);
     embed.setColor("#008000");
     webHook.send("", {
       username: "ChronoOne",
