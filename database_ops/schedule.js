@@ -1,5 +1,6 @@
 const database = require("../lib/database");
 const folder = require("./folderDB");
+
 const EventEmitter = require("events");
 
 class Schedule extends EventEmitter {
@@ -31,7 +32,35 @@ class Schedule extends EventEmitter {
 
   getAllSchedules() {}
 
-  getUserSchedules(guildId, schedulePath) {}
+  getUserSchedules(guildId, userId) {
+    // try {
+    //   const userSchedules = query(
+    //     database.createDatabase().ref(`${folder.value}/${guildId}/${userId}`)
+    //   );
+    //   console.log(userSchedules);
+    //   this.emit("getUserSchedules", userSchedules);
+    // } catch (error) {
+    //   console.log(`> Usuário não possui schedules.`);
+    //   console.log(error);
+    //   this.emit("getUserSchedules", 0);
+    // }
+
+    database
+      .createDatabase()
+      .ref(`${folder.value}/${guildId}/${userId}`)
+      .once("value")
+      .then((snapshot) => {
+        try {
+          console.log(snapshot.val().schedules);
+          let userSchedules = snapshot.val().schedules;
+          this.emit("getUserSchedules", userSchedules);
+        } catch (error) {
+          console.log(`Usuário não possui schedules.`);
+          console.log(error);
+          this.emit("getUserSchedules", 0);
+        }
+      });
+  }
 
   getSchedule(guildId, schedulePath) {
     database
