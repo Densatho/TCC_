@@ -33,18 +33,6 @@ class Schedule extends EventEmitter {
   getAllSchedules() {}
 
   getUserSchedules(guildId, userId) {
-    // try {
-    //   const userSchedules = query(
-    //     database.createDatabase().ref(`${folder.value}/${guildId}/${userId}`)
-    //   );
-    //   console.log(userSchedules);
-    //   this.emit("getUserSchedules", userSchedules);
-    // } catch (error) {
-    //   console.log(`> Usuário não possui schedules.`);
-    //   console.log(error);
-    //   this.emit("getUserSchedules", 0);
-    // }
-
     database
       .createDatabase()
       .ref(`${folder.value}/${guildId}/${userId}`)
