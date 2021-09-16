@@ -22,7 +22,13 @@ module.exports = {
         embed.setTitle(`Exibindo as tarefas para ${message.author.username}:`);
         console.log(values);
         Object.entries(values).forEach((value) => {
-          embed.addField(value, value.description);
+          embed.addField(
+            value[0],
+            "\n 📝 " +
+              value[1].description +
+              "\n\n 🕑 " +
+              `${new Date(value[1].dead_line)}`
+          );
         });
         webHook.send("", {
           username: "ChronoOne",
