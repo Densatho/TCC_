@@ -36,12 +36,14 @@ client.on("message", (message) => {
         });
     }
 
-    message.channel.fetchWebhooks().then((hooks) => {
-      hooks.forEach((element) => {
-        if (element.name === "ChronoOne");
-        element.delete("End of execution.");
+    setInterval(() => {
+      message.channel.fetchWebhooks().then((hooks) => {
+        hooks.forEach((element) => {
+          if (element.name === "ChronoOne");
+          element.delete("End of execution.");
+        });
       });
-    });
+    }, 1000);
   });
 });
 
