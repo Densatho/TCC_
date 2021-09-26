@@ -47,6 +47,7 @@ client.on("message", (message) => {
 sv.on("verify", (notifyTime) => {
   if (notifyTime) {
     console.log("> Notifying users");
+    sv.scheduleList();
   } else {
     console.log("> waiting to notify users");
   }
