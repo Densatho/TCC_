@@ -5,6 +5,7 @@ const scheduleVerify = require("./scheduleVerify");
 const sv = new scheduleVerify.ScheduleVerify();
 const dbPrefix = require("./database_ops/prefix");
 const Prefix = new dbPrefix.Prefix();
+const verifyTime = 3600000;
 
 client.commands = new Discord.Collection();
 
@@ -44,8 +45,8 @@ client.on("message", (message) => {
   });
 });
 
-sv.on("verify", (notifyTime) => {
-  if (notifyTime) {
+sv.on("verify", (notify) => {
+  if (notify) {
     console.log("> Notifying users");
     sv.scheduleList();
   } else {
@@ -53,6 +54,16 @@ sv.on("verify", (notifyTime) => {
   }
 });
 
-sv.verify();
+sv.on("notify", (guildId, userId, schedule) => {
+  let guild = client.guilds.cache.get(guildId);
+  let geralChannel = guild.channels.cache.find(
+    (channel) => channel.name === "geral"
+  );
+  geralChannel.send(
+    `<@${userId}> você tem a tarefa "${schedule[0]}" para amanhã\n${schedule[1].description}`
+  );
+});
+
+sv.verify(verifyTime);
 
 client.login("ODIyMjE0ODc4MDcyNjY4MTgw.YFPBRg.ECaLQuM61bWEeX-eb0AAz8y5CxE");

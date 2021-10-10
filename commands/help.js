@@ -28,19 +28,27 @@ module.exports = {
     if (!commandConfirm) {
       value_control = "";
       value_4fun = "";
+      value_cronograma = "";
       functions.get_commands().forEach((command) => {
         if (command.tag === "controle") {
           value_control += `\`${command.name}\`, `;
         } else if (command.tag === "4fun") {
           value_4fun += `\`${command.name}\`, `;
+        } else if (command.tag === "cronograma") {
+          value_cronograma += `\`${command.name}\`, `;
         }
       });
 
       value_control = value_control.substr(0, value_control.length - 2);
       value_4fun = value_4fun.substr(0, value_4fun.length - 2);
+      value_cronograma = value_cronograma.substr(
+        0,
+        value_cronograma.length - 2
+      );
 
       embed.addField(`Gerenciamento de bot:`, value_control);
       embed.addField(`Miscelânia:`, value_4fun);
+      embed.addField(`Cronograma:`, value_cronograma);
     }
 
     embed.setTitle(title);

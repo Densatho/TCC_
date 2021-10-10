@@ -5,7 +5,7 @@ const Sch = new dbSch.Schedule();
 module.exports = {
   name: "lsh",
   description: "Lista as Schedules do usuário",
-  tag: "list",
+  tag: "cronograma",
   execute(message, embed, webHook, args) {
     Sch.getUserSchedules(message.guild.id, message.author.id);
     Sch.once("getUserSchedules", (values) => {

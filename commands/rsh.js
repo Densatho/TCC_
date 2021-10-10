@@ -4,7 +4,7 @@ const Sch = new dbSch.Schedule();
 module.exports = {
   name: "rsh",
   description: "Exclui uma tarefa com o título informado.",
-  tag: "delete",
+  tag: "cronograma",
   execute(message, embed, webHook, args) {
     let title = "";
 

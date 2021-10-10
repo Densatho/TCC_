@@ -4,27 +4,31 @@ const guildId = require("./database_ops/guildId");
 const giDB = new guildId.guildId();
 
 class ScheduleVerify extends EventEmitter {
-  verify() {
-    let hour = 17;
-    let notifyTime = false;
+  verify(verifyTime) {
+    let hour = 12;
+    let notify = false;
     setInterval(() => {
       console.log("> verify: setInterval()");
       let dateNow = new Date(Date.now());
       if (dateNow.getHours() == hour) {
-        notifyTime = true;
+        notify = true;
       }
-      this.emit("verify", notifyTime);
-    }, 1000);
+      this.emit("verify", notify);
+    }, verifyTime);
   }
   scheduleList() {
-    console.log("message: ", message);
     giDB.GetAllGuilds();
-    giDB.once("getAllGuilds", (guilds) => {
-      Object.entries(guilds).forEach((guildsContent) => {
-        Object.entries(guildsContent[1]).forEach((users) => {
-          if (users[1].schedules !== undefined) {
-            Object.entries(users[1].schedules).forEach((schedule) => {
-              // console.log(schedule[1]);
+    giDB.once("getAllGuilds", (guild) => {
+      Object.entries(guild).forEach((guildContents) => {
+        Object.entries(guildContents[1]).forEach((user) => {
+          if (user[1].schedules !== undefined) {
+            Object.entries(user[1].schedules).forEach((schedule) => {
+              let deadLine = new Date(schedule[1].dead_line);
+              let tomorrow = new Date();
+              tomorrow.setDate(tomorrow.getDate() + 1);
+              if (deadLine.getDate() === tomorrow.getDate()) {
+                this.emit("notify", guildContents[0], user[0], schedule);
+              }
             });
           }
         });

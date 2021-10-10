@@ -5,7 +5,7 @@ const Sch = new dbSch.Schedule();
 module.exports = {
   name: "csh",
   description: "Cria uma nova tarefa composta de Título, descrição e prazo.",
-  tag: "create",
+  tag: "cronograma",
   execute(message, embed, webHook, args) {
     let sb = "";
 
