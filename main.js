@@ -7,12 +7,11 @@ const dbPrefix = require("./database_ops/prefix");
 const Prefix = new dbPrefix.Prefix();
 const verifyTime = 3600000;
 client.commands = new Discord.Collection();
-const http = require("http");
-const port = process.env.PORT;
-const server = http.createServer((req, res) => {});
+const PORT = process.env.PORT || 5000;
+const express = require("express");
 
-server.listen(port, "127.0.0.1", () => {
-  console.log(`Server running at http://127.0.0.1:${port}/`);
+express().listen(PORT, () => {
+  console.log(`Listening on ${PORT}`);
 });
 
 functions.get_commands().forEach((element) => {
