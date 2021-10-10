@@ -7,12 +7,6 @@ const dbPrefix = require("./database_ops/prefix");
 const Prefix = new dbPrefix.Prefix();
 const verifyTime = 3600000;
 client.commands = new Discord.Collection();
-const PORT = process.env.PORT || 5000;
-const express = require("express");
-
-express().listen(PORT, () => {
-  console.log(`Listening on ${PORT}`);
-});
 
 functions.get_commands().forEach((element) => {
   client.commands.set(element.name, element.command);
