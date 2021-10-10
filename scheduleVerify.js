@@ -5,7 +5,7 @@ const giDB = new guildId.guildId();
 
 class ScheduleVerify extends EventEmitter {
   verify(verifyTime) {
-    let hour = 12;
+    let hour = 17;
     let notify = false;
     setInterval(() => {
       console.log("> verify: setInterval()");
@@ -27,7 +27,13 @@ class ScheduleVerify extends EventEmitter {
               let tomorrow = new Date();
               tomorrow.setDate(tomorrow.getDate() + 1);
               if (deadLine.getDate() === tomorrow.getDate()) {
-                this.emit("notify", guildContents[0], user[0], schedule);
+                this.emit(
+                  "notify",
+                  guildContents[0],
+                  user[0],
+                  schedule,
+                  guildContents[1].notifyChannel
+                );
               }
             });
           }

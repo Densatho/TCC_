@@ -1,6 +1,8 @@
 const database = require("../lib/database");
 const folder = require("./folderDB");
 const EventEmitter = require("events");
+const NotifyChannel = require("./notifyChannel");
+const notifyChannel = new NotifyChannel();
 
 class Prefix extends EventEmitter {
   /**
@@ -54,7 +56,8 @@ class Prefix extends EventEmitter {
    * usando o createPrefix
    * @param {*int} guildId
    */
-  getPrefix(guildId) {
+  getPrefix(message) {
+    let guildId = message.guild.id;
     database
       .createDatabase()
       .ref(folder.value)
@@ -67,6 +70,7 @@ class Prefix extends EventEmitter {
           console.log(`> server is not registered...`);
           console.log(`> registering server...`);
           this.createPrefix(guildId);
+          notifyChannel.createNotifyChannel(guildId, message.channel.id);
           this.getPrefix(guildId);
         }
       });

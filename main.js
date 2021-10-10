@@ -5,7 +5,7 @@ const scheduleVerify = require("./scheduleVerify");
 const sv = new scheduleVerify.ScheduleVerify();
 const dbPrefix = require("./database_ops/prefix");
 const Prefix = new dbPrefix.Prefix();
-const verifyTime = 3600000;
+const verifyTime = 10000; //3600000;
 
 client.commands = new Discord.Collection();
 
@@ -18,7 +18,7 @@ client.once("ready", () => {
 });
 
 client.on("message", (message) => {
-  Prefix.getPrefix(message.guild.id);
+  Prefix.getPrefix(message);
 
   Prefix.once("getPrefix", (prefix) => {
     console.log(`> ${message.guild.name}'s prefix: ${prefix}`);
@@ -54,12 +54,13 @@ sv.on("verify", (notify) => {
   }
 });
 
-sv.on("notify", (guildId, userId, schedule) => {
+sv.on("notify", (guildId, userId, schedule, channelId) => {
   let guild = client.guilds.cache.get(guildId);
-  let geralChannel = guild.channels.cache.find(
-    (channel) => channel.name === "geral"
+  let notifyChannel = guild.channels.cache.find(
+    (channel) => channel.id === channelId
   );
-  geralChannel.send(
+  console.log(schedule, channelId);
+  notifyChannel.send(
     `<@${userId}> você tem a tarefa "${schedule[0]}" para amanhã\n${schedule[1].description}`
   );
 });
