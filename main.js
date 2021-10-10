@@ -5,7 +5,7 @@ const scheduleVerify = require("./scheduleVerify");
 const sv = new scheduleVerify.ScheduleVerify();
 const dbPrefix = require("./database_ops/prefix");
 const Prefix = new dbPrefix.Prefix();
-const verifyTime = 10000; //3600000;
+const verifyTime = 3600000;
 
 client.commands = new Discord.Collection();
 
