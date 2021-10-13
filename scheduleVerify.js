@@ -4,8 +4,7 @@ const guildId = require("./database_ops/guildId");
 const giDB = new guildId.guildId();
 
 class ScheduleVerify extends EventEmitter {
-  verify(verifyTime) {
-    let hour = 17;
+  verify(verifyTime, hour) {
     let notify = false;
     setInterval(() => {
       console.log("> verify: setInterval()");
@@ -26,7 +25,10 @@ class ScheduleVerify extends EventEmitter {
               let deadLine = new Date(schedule[1].dead_line);
               let tomorrow = new Date();
               tomorrow.setDate(tomorrow.getDate() + 1);
-              if (deadLine.getDate() === tomorrow.getDate()) {
+              if (
+                deadLine.getDate() === tomorrow.getDate() &&
+                deadLine.getMonth() === tomorrow.getMonth()
+              ) {
                 this.emit(
                   "notify",
                   guildContents[0],

@@ -6,6 +6,7 @@ const sv = new scheduleVerify.ScheduleVerify();
 const dbPrefix = require("./database_ops/prefix");
 const Prefix = new dbPrefix.Prefix();
 const verifyTime = 3600000;
+const NotifyHour = 12;
 client.commands = new Discord.Collection();
 
 functions.get_commands().forEach((element) => {
@@ -64,6 +65,6 @@ sv.on("notify", (guildId, userId, schedule, channelId) => {
   );
 });
 
-sv.verify(verifyTime);
+sv.verify(verifyTime, NotifyHour);
 
 client.login("ODIyMjE0ODc4MDcyNjY4MTgw.YFPBRg.ECaLQuM61bWEeX-eb0AAz8y5CxE");
