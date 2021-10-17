@@ -5,8 +5,8 @@ const scheduleVerify = require("./scheduleVerify");
 const sv = new scheduleVerify.ScheduleVerify();
 const dbPrefix = require("./database_ops/prefix");
 const Prefix = new dbPrefix.Prefix();
-const verifyTime = 3600000;
-const NotifyHour = 12;
+const verifyTime = 10000; //3600000;
+const NotifyHour = 22;
 client.commands = new Discord.Collection();
 
 functions.get_commands().forEach((element) => {
@@ -54,15 +54,48 @@ sv.on("verify", (notify) => {
   }
 });
 
-sv.on("notify", (guildId, userId, schedule, channelId) => {
+sv.on("notify", (guildId, userId, scheduleList, channelId) => {
+  const embed = new Discord.MessageEmbed();
   let guild = client.guilds.cache.get(guildId);
   let notifyChannel = guild.channels.cache.find(
     (channel) => channel.id === channelId
   );
-  console.log(schedule, channelId);
-  notifyChannel.send(
-    `<@${userId}> você tem a tarefa "${schedule[0]}" para amanhã\n${schedule[1].description}`
-  );
+  notifyChannel.send(`<@${userId}>`);
+  notifyChannel
+    .createWebhook("ChronoOne", (reason = "Send message"))
+    .then((webHook) => {
+      embed.setTitle(`Suas seguintes tarefas estão próximas:`);
+      scheduleList.forEach((value) => {
+        embed.addField(
+          `Tarefa: ${value[0]}`,
+          "\n" +
+            //`Descrição: ${value[1].description}` +
+            `Prazo: ${
+              new Date(value[1].dead_line).getDate() - new Date().getDate()
+            } dias.\n\n`
+        );
+      });
+      webHook.send("", {
+        username: "ChronoOne",
+        avatarURL: "https://imgur.com/M2uFwtY.png",
+        embeds: [embed],
+      });
+    });
+  message.channel.fetchWebhooks().then((hooks) => {
+    hooks.forEach((element) => {
+      if (element.name === "ChronoOne");
+      element.delete("End of execution.");
+    });
+  });
+
+  // console.log(schedule, channelId);
+  // let intervalMessage = `daqui ${interval} dias`;
+  // if (interval === 1) {
+  //   intervalMessage = "amanhã";
+  // }
+  // notifyChannel.send(
+  //   `, sua tarefa "${schedule[0]}" está agendada para ${intervalMessage}.\nDescrição:${schedule[1].description}`
+  // );
 });
 
 sv.verify(verifyTime, NotifyHour);
