@@ -6,7 +6,7 @@ const sv = new scheduleVerify.ScheduleVerify();
 const dbPrefix = require("./database_ops/prefix");
 const Prefix = new dbPrefix.Prefix();
 const verifyTime = 10000; //3600000;
-const NotifyHour = 22;
+const NotifyHour = 19;
 client.commands = new Discord.Collection();
 
 functions.get_commands().forEach((element) => {
@@ -60,33 +60,35 @@ sv.on("notify", (guildId, userId, scheduleList, channelId) => {
   let notifyChannel = guild.channels.cache.find(
     (channel) => channel.id === channelId
   );
-  notifyChannel.send(`<@${userId}>`);
-  notifyChannel
-    .createWebhook("ChronoOne", (reason = "Send message"))
-    .then((webHook) => {
-      embed.setTitle(`Suas seguintes tarefas estão próximas:`);
-      scheduleList.forEach((value) => {
-        embed.addField(
-          `Tarefa: ${value[0]}`,
-          "\n" +
-            //`Descrição: ${value[1].description}` +
-            `Prazo: ${
-              new Date(value[1].dead_line).getDate() - new Date().getDate()
-            } dias.\n\n`
-        );
+  if (notifyChannel) {
+    notifyChannel.send(`<@${userId}>`);
+    notifyChannel
+      .createWebhook("ChronoOne", (reason = "Send message"))
+      .then((webHook) => {
+        embed.setTitle(`Suas seguintes tarefas estão próximas:`);
+        scheduleList.forEach((value) => {
+          embed.addField(
+            `Tarefa: ${value[0]}`,
+            "\n" +
+              //`Descrição: ${value[1].description}` +
+              `Prazo: ${
+                new Date(value[1].dead_line).getDate() - new Date().getDate()
+              } dias.\n\n`
+          );
+        });
+        webHook.send("", {
+          username: "ChronoOne",
+          avatarURL: "https://imgur.com/M2uFwtY.png",
+          embeds: [embed],
+        });
       });
-      webHook.send("", {
-        username: "ChronoOne",
-        avatarURL: "https://imgur.com/M2uFwtY.png",
-        embeds: [embed],
+    notifyChannel.fetchWebhooks().then((hooks) => {
+      hooks.forEach((element) => {
+        if (element.name === "ChronoOne");
+        element.delete("End of execution.");
       });
     });
-  message.channel.fetchWebhooks().then((hooks) => {
-    hooks.forEach((element) => {
-      if (element.name === "ChronoOne");
-      element.delete("End of execution.");
-    });
-  });
+  }
 
   // console.log(schedule, channelId);
   // let intervalMessage = `daqui ${interval} dias`;
