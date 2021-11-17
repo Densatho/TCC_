@@ -30,8 +30,6 @@ class Schedule extends EventEmitter {
     this.emit("deleteSchedule", confirmation);
   }
 
-  getAllSchedules() {}
-
   getUserSchedules(guildId, userId) {
     database
       .createDatabase()

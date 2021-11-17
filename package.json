@@ -22,7 +22,8 @@
   "homepage": "https://github.com/Densatho/TCC_#readme",
   "dependencies": {
     "discord.js": "^12.5.1",
-    "firebase": "^8.9.1"
+    "firebase": "^8.9.1",
+    "firebase-admin": "10.0.0"
   },
   "devDependencies": {
     "prettier": "2.3.2"
