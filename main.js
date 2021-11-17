@@ -18,7 +18,13 @@ client.once("ready", () => {
 });
 
 client.on("message", (message) => {
-  Prefix.getPrefix(message);
+  try {
+    Prefix.getPrefix(message);
+  } catch (error) {
+    if (!message.author.bot) {
+      message.channel.send("não aceitamos comandos no privado.");
+    }
+  }
 
   Prefix.once("getPrefix", (prefix) => {
     // console.log(`> ${message.guild.name}'s prefix: ${prefix}`);
