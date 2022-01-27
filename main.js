@@ -120,4 +120,4 @@ sv.on("notify", (guildId, userId, scheduleList, channelId) => {
 
 sv.verify(verifyTime, NotifyHour);
 
-client.login("ODIyMjE0ODc4MDcyNjY4MTgw.YFPBRg.ECaLQuM61bWEeX-eb0AAz8y5CxE");
+client.login("AccessToken");
